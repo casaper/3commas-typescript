@@ -20,6 +20,7 @@ import {
 import { sign } from './lib/crypto';
 import { Convert, Order } from './types/generated-types';
 import { Deal } from './types/deal.interface';
+import { UpdateDealParams } from './types/update-deal.interface';
 
 const ENDPOINT = 'https://api.3commas.io';
 const V1 = '/public/api/ver1';
@@ -363,6 +364,10 @@ export class API {
 
   async getDealSafetyOrders(id: number) {
     return await this.request('GET', 1, `/deals/${id}/market_orders`);
+  }
+
+  updateDeal({ id, ...params }: UpdateDealParams): Promise<Deal> {
+    return this.request('PATCH', 1, `/deals/${id}/update_deal`, params);
   }
 
   async customRequest(
