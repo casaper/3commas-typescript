@@ -109,52 +109,52 @@ export class API {
     });
   }
 
-  async ping() {
-    return await this.request('GET', 1, '/ping');
+  ping() {
+    return this.request('GET', 1, '/ping');
   }
 
-  async time() {
-    return await this.request('GET', 1, '/time');
+  time() {
+    return this.request('GET', 1, '/time');
   }
 
-  async transfer(params: TransferParams) {
-    return await this.request('POST', 1, '/accounts/transfer', params);
+  transfer(params: TransferParams) {
+    return this.request('POST', 1, '/accounts/transfer', params);
   }
 
-  async getTransferHistory(params: TransferHistoryParams) {
-    return await this.request('GET', 1, '/accounts/transfer_history', params);
+  getTransferHistory(params: TransferHistoryParams) {
+    return this.request('GET', 1, '/accounts/transfer_history', params);
   }
 
-  async getTransferData() {
-    return await this.request('GET', 1, '/accounts/transfer_data');
+  getTransferData() {
+    return this.request('GET', 1, '/accounts/transfer_data');
   }
 
-  async addExchangeAccount(params: any) {
-    return await this.request('POST', 1, '/accounts/new', params);
+  addExchangeAccount(params: any) {
+    return this.request('POST', 1, '/accounts/new', params);
   }
 
-  async editExchangeAccount(params: any) {
-    return await this.request('POST', 1, '/accounts/update', params);
+  editExchangeAccount(params: any) {
+    return this.request('POST', 1, '/accounts/update', params);
   }
 
-  async getExchange() {
-    return await this.request('GET', 1, '/accounts');
+  getExchange() {
+    return this.request('GET', 1, '/accounts');
   }
 
-  async getMarketList() {
-    return await this.request('GET', 1, '/accounts/market_list');
+  getMarketList() {
+    return this.request('GET', 1, '/accounts/market_list');
   }
 
-  async getMarketPairs(params?: any) {
-    return await this.request('GET', 1, '/accounts/market_pairs', params);
+  getMarketPairs(params?: any) {
+    return this.request('GET', 1, '/accounts/market_pairs', params);
   }
 
-  async getCurrencyRate(params: CurrencyParams) {
-    return await this.request('GET', 1, '/accounts/currency_rates', params);
+  getCurrencyRate(params: CurrencyParams) {
+    return this.request('GET', 1, '/accounts/currency_rates', params);
   }
 
-  async getCurrencyRateWithLeverageData(params: MarketCurrencyParams) {
-    return await this.request(
+  getCurrencyRateWithLeverageData(params: MarketCurrencyParams) {
+    return this.request(
       'GET',
       1,
       '/accounts/currency_rates_with_leverage_data',
@@ -162,32 +162,24 @@ export class API {
     );
   }
 
-  async getActiveTradeEntities(account_id: number | string) {
-    return await this.request(
+  getActiveTradeEntities(account_id: number | string) {
+    return this.request(
       'GET',
       1,
       `/accounts/${account_id}/active_trading_entities`
     );
   }
 
-  async sellAllToUSD(account_id: number | string) {
-    return await this.request(
-      'POST',
-      1,
-      `/accounts/${account_id}/sell_all_to_usd`
-    );
+  sellAllToUSD(account_id: number | string) {
+    return this.request('POST', 1, `/accounts/${account_id}/sell_all_to_usd`);
   }
 
-  async sellAllToBTC(account_id: number | string) {
-    return await this.request(
-      'POST',
-      1,
-      `/accounts/${account_id}/sell_all_to_btc`
-    );
+  sellAllToBTC(account_id: number | string) {
+    return this.request('POST', 1, `/accounts/${account_id}/sell_all_to_btc`);
   }
 
-  async getBalanceChartData(account_id: number | string, params: any) {
-    return await this.request(
+  getBalanceChartData(account_id: number | string, params: any) {
+    return this.request(
       'GET',
       1,
       `/accounts/${account_id}/balance_chart_data`,
@@ -195,111 +187,88 @@ export class API {
     );
   }
 
-  async loadBalances(account_id: number | string) {
-    return await this.request(
-      'POST',
-      1,
-      `/accounts/${account_id}/load_balances`
-    );
+  loadBalances(account_id: number | string) {
+    return this.request('POST', 1, `/accounts/${account_id}/load_balances`);
   }
 
-  async renameExchangeAccount(account_id: number | string, name: string) {
-    return await this.request('POST', 1, `/accounts/${account_id}/rename`, {
+  renameExchangeAccount(account_id: number | string, name: string) {
+    return this.request('POST', 1, `/accounts/${account_id}/rename`, {
       name,
     });
   }
 
-  async removeExchangeAccount(account_id: number | string) {
-    return await this.request('POST', 1, `/accounts/${account_id}/remove`);
+  removeExchangeAccount(account_id: number | string) {
+    return this.request('POST', 1, `/accounts/${account_id}/remove`);
   }
 
-  async getPieChartData(account_id: number | string) {
-    return await this.request(
-      'POST',
-      1,
-      `/accounts/${account_id}/pie_chart_data`
-    );
+  getPieChartData(account_id: number | string) {
+    return this.request('POST', 1, `/accounts/${account_id}/pie_chart_data`);
   }
 
-  async getAccountTableData(account_id: number | string) {
-    return await this.request(
+  getAccountTableData(account_id: number | string) {
+    return this.request(
       'POST',
       1,
       `/accounts/${account_id}/account_table_data`
     );
   }
 
-  async getAccountInfo(account_id?: number) {
-    return await this.request('GET', 1, `/accounts/${account_id ?? 'summary'}`);
+  getAccountInfo(account_id?: number) {
+    return this.request('GET', 1, `/accounts/${account_id ?? 'summary'}`);
   }
 
-  async getLeverageData(account_id: number | string, pair: string) {
-    return await this.request(
-      'GET',
-      1,
-      `/accounts/${account_id}/leverage_data`,
-      { pair }
-    );
+  getLeverageData(account_id: number | string, pair: string) {
+    return this.request('GET', 1, `/accounts/${account_id}/leverage_data`, {
+      pair,
+    });
   }
 
-  async changeUserMode(mode: 'paper' | 'real') {
-    return await this.request('POST', 1, '/users/change_mode', { mode });
+  changeUserMode(mode: 'paper' | 'real') {
+    return this.request('POST', 1, '/users/change_mode', { mode });
   }
 
-  async getSmartTradeHistory(
-    params?: SmartTradeHistoryParams
-  ): Promise<Order[]> {
-    return await this.request('GET', 2, '/smart_trades', params);
+  getSmartTradeHistory(params?: SmartTradeHistoryParams): Promise<Order[]> {
+    return this.request('GET', 2, '/smart_trades', params);
   }
 
-  async smartTrade(params: SmartTradeParams): Promise<Order> {
-    return await this.request('POST', 2, '/smart_trades', params);
+  smartTrade(params: SmartTradeParams): Promise<Order> {
+    return this.request('POST', 2, '/smart_trades', params);
   }
 
-  async getSmartTrade(id: number): Promise<Order> {
-    return await this.request('GET', 2, `/smart_trades/${id}`);
+  getSmartTrade(id: number): Promise<Order> {
+    return this.request('GET', 2, `/smart_trades/${id}`);
   }
 
-  async cancelSmartTrade(id: number): Promise<Order> {
-    return await this.request('DELETE', 2, `/smart_trades/${id}`);
+  cancelSmartTrade(id: number): Promise<Order> {
+    return this.request('DELETE', 2, `/smart_trades/${id}`);
   }
 
-  async updateSmartTrade(id: number, params: any): Promise<Order> {
-    return await this.request('PATCH', 2, `/smart_trades/${id}`, params);
+  updateSmartTrade(id: number, params: any): Promise<Order> {
+    return this.request('PATCH', 2, `/smart_trades/${id}`, params);
   }
 
-  async averageSmartTrade(id: number, params: FundParams): Promise<Order> {
-    return await this.request(
-      'POST',
-      2,
-      `/smart_trades/${id}/add_funds`,
-      params
-    );
+  averageSmartTrade(id: number, params: FundParams): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/add_funds`, params);
   }
 
-  async reduceFund(id: number, params: FundParams): Promise<Order> {
-    return await this.request(
-      'POST',
-      2,
-      `/smart_trades/${id}/reduce_funds`,
-      params
-    );
+  reduceFund(id: number, params: FundParams): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/reduce_funds`, params);
   }
 
-  async closeSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/close_by_market`);
+  closeSmartTrade(id: number): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/close_by_market`);
   }
 
-  async forceStartSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/force_start`);
+  forceStartSmartTrade(id: number): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/force_start`);
   }
 
-  async forceProcessSmartTrade(id: number): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/force_process`);
+  forceProcessSmartTrade(id: number): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/force_process`);
   }
 
-  async setNoteSmartTrade(id: number, note: string): Promise<Order> {
-    return await this.request('POST', 2, `/smart_trades/${id}/set_note`, {
+  setNoteSmartTrade(id: number, note: string): Promise<Order> {
+    return this.request('POST', 2, `/smart_trades/${id}/set_note`, {
       note,
     });
   }
@@ -310,73 +279,73 @@ export class API {
    * @param id smart trade id
    * @returns SmartTrade Order
    */
-  async getSubTrade(id: number) {
-    return await this.request('GET', 2, `/smart_trades/${id}/trades`);
+  getSubTrade(id: number) {
+    return this.request('GET', 2, `/smart_trades/${id}/trades`);
   }
 
-  async closeSubTrade(smartTradeId: number, subTradeId: number) {
-    return await this.request(
+  closeSubTrade(smartTradeId: number, subTradeId: number) {
+    return this.request(
       'POST',
       2,
       `/smart_trades/${smartTradeId}/trades/${subTradeId}/close_by_market`
     );
   }
 
-  async cancelSubTrade(smartTradeId: number, subTradeId: number) {
-    return await this.request(
+  cancelSubTrade(smartTradeId: number, subTradeId: number) {
+    return this.request(
       'DELETE',
       2,
       `/smart_trades/${smartTradeId}/trades/${subTradeId}`
     );
   }
 
-  async getBots(
+  getBots(
     params: BotsParams = {
       limit: 50,
       sort_by: 'created_at',
       sort_direction: 'desc',
     }
   ) {
-    return await this.request('GET', 1, '/bots', params);
+    return this.request('GET', 1, '/bots', params);
   }
 
-  async getBotsStats(params?: BotsStatsParams) {
-    return await this.request('GET', 1, '/bots/stats', params);
+  getBotsStats(params?: BotsStatsParams) {
+    return this.request('GET', 1, '/bots/stats', params);
   }
 
-  async getBot(id: number) {
-    return await this.request('GET', 1, `/bots/${id}/show`);
+  getBot(id: number) {
+    return this.request('GET', 1, `/bots/${id}/show`);
   }
 
-  async getDeals(
+  getDeals(
     params: DealsParams = {
       limit: 50,
       order: 'created_at',
       order_direction: 'desc',
     }
   ): Promise<Deal[]> {
-    return await this.request('GET', 1, '/deals', params);
+    return this.request('GET', 1, '/deals', params);
   }
 
-  async getDeal(id: number): Promise<Deal> {
-    return await this.request('GET', 1, `/deals/${id}/show`);
+  getDeal(id: number): Promise<Deal> {
+    return this.request('GET', 1, `/deals/${id}/show`);
   }
 
-  async getDealSafetyOrders(id: number) {
-    return await this.request('GET', 1, `/deals/${id}/market_orders`);
+  getDealSafetyOrders(id: number) {
+    return this.request('GET', 1, `/deals/${id}/market_orders`);
   }
 
   updateDeal({ id, ...params }: UpdateDealParams): Promise<Deal> {
     return this.request('PATCH', 1, `/deals/${id}/update_deal`, params);
   }
 
-  async customRequest(
+  customRequest(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
     payload?: any
   ) {
-    return await this.request(method, version, path, payload);
+    return this.request(method, version, path, payload);
   }
 
   // Websocket
