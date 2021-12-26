@@ -30,17 +30,12 @@ const WS = 'wss://ws.3commas.io/websocket';
 export class API {
   private readonly KEY: string;
   private readonly SECRETS: string;
-  private readonly errorHandler?: (
-    response: ThreeCommasError,
-    reject: (reason?: any) => void
-  ) => void | Promise<any>;
   private axios: AxiosInstance;
   private ws?: WebSocket;
 
   constructor(options?: APIOptions) {
     this.KEY = options?.key ?? '';
     this.SECRETS = options?.secrets ?? '';
-    this.errorHandler = options?.errorHandler;
     this.axios = Axios.create({
       baseURL: ENDPOINT,
       timeout: options?.timeout ?? 30000,
@@ -84,29 +79,25 @@ export class API {
     );
   }
 
-  private request(
+  async request<T = any>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
     version: 1 | 2,
     path: string,
     payload?: any
-  ): Promise<any> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const { data } = await this.axios({
-          method,
-          url: `${ENDPOINT}${version === 1 ? V1 : V2}${path}`,
-          params: method === 'GET' ? payload : undefined,
-          data: method !== 'GET' ? payload : undefined,
-        });
-        resolve(data);
-      } catch (e) {
-        const error = e as AxiosError<ThreeCommasError>;
-        if (error.response?.data && this.errorHandler) {
-          await this.errorHandler(error.response.data, reject);
-        }
-        reject(error.response?.data ?? error);
-      }
-    });
+  ): Promise<T> {
+    try {
+      const { data } = await this.axios({
+        method,
+        url: `${ENDPOINT}${version === 1 ? V1 : V2}${path}`,
+        params: method === 'GET' ? payload : undefined,
+        data: method !== 'GET' ? payload : undefined,
+      });
+      return data as T;
+    } catch (e) {
+      const error = e as AxiosError<ThreeCommasError>;
+      console.error(error.response?.data ?? error);
+      throw e;
+    }
   }
 
   ping() {
